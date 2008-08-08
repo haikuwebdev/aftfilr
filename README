@@ -1,8 +1,9 @@
 Aftfilr
 =======
 
-Introduction goes here.
-
+A generator for creating a TinyMCE plugin for inserting links to server 
+documents. Works similarly to the built-in scaffold generator, but does not
+generate a test suite or helpers at this time.
 
 Example
 =======
@@ -10,4 +11,4 @@ Example
 Example goes here.
 
 
-Copyright (c) 2008 [name of plugin creator], released under the MIT license
+Copyright (c) 2008 TJ Stankus, released under the MIT license.
