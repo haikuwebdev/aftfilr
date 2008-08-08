@@ -1,0 +1,12 @@
+<h1>Listing <%= plural_name %></h1>
+
+<%%- @<%= plural_name %>.each do |doc| -%>
+  <div>
+    <%%= link_to doc.filename, doc.public_filename %>
+    <%%= link_to 'Destroy', doc, :confirm => 'Are you sure?', :method => :delete %>
+  </div>
+<%%- end -%>
+
+<br />
+
+<%%= link_to 'New <%= singular_name %>', new_<%= singular_name %>_path %>

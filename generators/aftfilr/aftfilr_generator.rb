@@ -37,8 +37,15 @@ class AftfilrGenerator < Rails::Generator::NamedBase
     record do |m|
       # APPTODO: Check for class collisions
       
+      
       # Models
-      m.template 'models/attfu_model.rb', "app/models/#{singular_name}.rb"
+      m.directory(File.join('app/models', class_path))
+      m.template 'models/attfu_model.rb', File.join('app/models', class_path, "#{singular_name}.rb")
+      
+      # Controllers
+      m.directory(File.join('app/controllers', controller_class_path))
+      m.template('controllers/aftfilr_controller.rb', 
+                 File.join('app/controllers', controller_class_path, "#{controller_file_name}_controller.rb"))
       
       # TinyMCE plugin
       m.directory(tinymce_plugin_dir)
@@ -61,6 +68,14 @@ class AftfilrGenerator < Rails::Generator::NamedBase
                              :assigns => { :migration_class_name => migration_class_name },
                              :migration_file_name => "create_#{table_name}"
       end
+      
+      # Views
+      m.directory(File.join('app/views', controller_class_path, controller_file_name))
+      m.template 'views/new.html.erb', File.join(views_dir, 'new.html.erb')
+      m.template 'views/index.html.erb', File.join(views_dir, 'index.html.erb')
+      
+      # Routes
+      m.route_resources controller_file_name
       
     end
   end
@@ -85,6 +100,10 @@ class AftfilrGenerator < Rails::Generator::NamedBase
   
   def migration_class_name
     "Create#{controller_class_name}"
+  end
+  
+  def views_dir
+    File.join('app/views', controller_class_path, controller_file_name)
   end
   
   protected
