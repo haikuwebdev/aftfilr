@@ -28,7 +28,7 @@
 			ed.addButton('<%= singular_name %>', {
 				title : '<%= singular_name %>.desc',
 				cmd : 'mce<%= model_class_name %>',
-				image : url + '/img/<%= singular_name %>.gif'
+				image : url + '/img/<%= singular_name %>.png'
 			});
 
 			// Add a node change handler, selects the button in the UI when a image is selected
