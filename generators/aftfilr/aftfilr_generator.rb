@@ -40,18 +40,18 @@ class AftfilrGenerator < Rails::Generator::NamedBase
       
       # TinyMCE plugin
       m.directory(tinymce_plugin_dir)
-      m.file 'tinymce_plugin/dialog.htm', File.join(tinymce_plugin_dir, 'dialog.htm')
-      m.file 'tinymce_plugin/editor_plugin.js', File.join(tinymce_plugin_dir, 'editor_plugin.js')
+      m.template 'tinymce_plugin/dialog.htm', File.join(tinymce_plugin_dir, 'dialog.htm')
+      m.template 'tinymce_plugin/editor_plugin.js', File.join(tinymce_plugin_dir, 'editor_plugin.js')
       m.directory(File.join(tinymce_plugin_dir, 'css'))
       m.file 'tinymce_plugin/css/aftfilr.css', File.join(tinymce_plugin_dir, 'css', "#{singular_name}.css")
       m.directory(File.join(tinymce_plugin_dir, 'img'))
       m.file 'tinymce_plugin/img/aftfilr.png', File.join(tinymce_plugin_dir, 'img', "#{singular_name}.png")
       m.file 'tinymce_plugin/img/category.png', File.join(tinymce_plugin_dir, 'img', "category.png")
       m.directory(File.join(tinymce_plugin_dir, 'js'))
-      m.file 'tinymce_plugin/js/dialog.js', File.join(tinymce_plugin_dir, 'js', "dialog.js")
+      m.template 'tinymce_plugin/js/dialog.js', File.join(tinymce_plugin_dir, 'js', "dialog.js")
       m.directory(File.join(tinymce_plugin_dir, 'langs'))
-      m.file 'tinymce_plugin/langs/en.js', File.join(tinymce_plugin_dir, 'langs', "en.js")
-      m.file 'tinymce_plugin/langs/en_dlg.js', File.join(tinymce_plugin_dir, 'langs', "en_dlg.js")
+      m.template 'tinymce_plugin/langs/en.js', File.join(tinymce_plugin_dir, 'langs', "en.js")
+      m.template 'tinymce_plugin/langs/en_dlg.js', File.join(tinymce_plugin_dir, 'langs', "en_dlg.js")
     end
   end
   
