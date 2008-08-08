@@ -1,5 +1,5 @@
 class AftfilrGenerator < Rails::Generator::NamedBase
-  default_options :with_categories => false
+  default_options :with_categories => false,:skip_migration => false
   
   attr_reader   :controller_name,
                 :controller_class_path,
@@ -35,8 +35,10 @@ class AftfilrGenerator < Rails::Generator::NamedBase
   
   def manifest
     record do |m|
-      # Check for class collisions
-      m.class_collisions class_path, model_class_name #, controller_class_name
+      # APPTODO: Check for class collisions
+      
+      # Models
+      m.template 'models/attfu_model.rb', "app/models/#{singular_name}.rb"
       
       # TinyMCE plugin
       m.directory(tinymce_plugin_dir)
@@ -52,6 +54,14 @@ class AftfilrGenerator < Rails::Generator::NamedBase
       m.directory(File.join(tinymce_plugin_dir, 'langs'))
       m.template 'tinymce_plugin/langs/en.js', File.join(tinymce_plugin_dir, 'langs', "en.js")
       m.template 'tinymce_plugin/langs/en_dlg.js', File.join(tinymce_plugin_dir, 'langs', "en_dlg.js")
+      
+      # Migrations
+      unless options[:skip_migration]
+        m.migration_template 'migrations/attfu_migration.rb', 'db/migrate',
+                             :assigns => { :migration_class_name => migration_class_name },
+                             :migration_file_name => "create_#{table_name}"
+      end
+      
     end
   end
   
@@ -73,11 +83,17 @@ class AftfilrGenerator < Rails::Generator::NamedBase
     class_path.empty? ? "/#{plural_name}" : "/#{class_path.join('/')}/#{plural_name}"
   end
   
+  def migration_class_name
+    "Create#{controller_class_name}"
+  end
+  
   protected
   
   def add_options!(opt)
     opt.separator ''
     opt.separator 'Options:'
+    opt.on("--skip-migration",
+           "Do not generate migrations for any models.") { |v| options[:skip_migration] = v }
     opt.on("--with-categories",
            "Add categories to be associated with the generated model.") { |v| options[:with_categories] = v }
   end
