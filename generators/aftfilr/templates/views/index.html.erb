@@ -1,6 +1,6 @@
 <h1>Listing <%= plural_name %></h1>
 
-<%%- @<%= plural_name %>.each do |doc| -%>
+<%%- @documents.each do |doc| -%>
   <div>
     <%%- doc_info = doc.filename + (doc.category ? " (#{doc.category.name})" : '')  -%>
     <%%= link_to doc_info, doc.public_filename %>

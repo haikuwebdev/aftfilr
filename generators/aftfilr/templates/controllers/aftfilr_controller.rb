@@ -3,7 +3,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # GET /<%= plural_name %>
   def index
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { @documents = <%= model_class_name %>.find(:all) }
       format.js { index_js }
     end
   end
@@ -26,7 +26,7 @@ class <%= controller_class_name %>Controller < ApplicationController
       if @<%= singular_name %>.save
         flash[:notice] = '<%= model_class_name %> was successfully created.'
         format.html { redirect_to(<%= plural_name %>_url) }
-        format.js {}
+        format.js { responds_to_parent { index_js } }
       else
         format.html { render :action => "new" }
         format.js {}
@@ -73,6 +73,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     render :update do |page|
       page.replace_html :categories_area, :partial => '<%= categories_plural_name %>/category', :collection => @categories
       page.replace_html :documents_area, :partial => '<%= plural_name %>/document', :collection => @documents
+      page.replace_html :form_area, :partial => '<%= plural_name %>/upload'
     end
   end
 end

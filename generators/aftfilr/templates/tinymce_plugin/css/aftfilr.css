@@ -11,10 +11,10 @@ h1#aftfilr_heading {
 }
 div.document_link {
   cursor: pointer;
-  /*float: left;*/
+  float: left;
   padding: 10px;
   text-align: center;
-  width: 120px;
+  /*width: 120px;*/
 }
 table#aftfilr_content_area {
   margin: 10px 20px;
@@ -57,9 +57,12 @@ table#aftfilr_content_area td#right_column {
   width: 600px;
 }
 table#aftfilr_content_area td#right_column div#documents_area {
-  background-color: #ececec;
-	border: 2px solid #666666;
-	padding: 10px;
+  padding: 10px;
   width: 590px;
+}
+table#aftfilr_content_area td#right_column div#form_area {
+  border-top: 2px solid #666666;
+  clear: both;
+  margin: 10px 0;
 }
 
