@@ -1,4 +1,4 @@
-class <%= model_class_name %>Category < ActiveRecord::Base
+class <%= category_model_class_name %> < ActiveRecord::Base
   has_many :<%= plural_name %>
 
   def self.default

@@ -121,7 +121,7 @@ class AftfilrGenerator < Rails::Generator::NamedBase
     "#{singular_name}_categories"
   end
   
-  def category_class_name
+  def category_model_class_name
     "#{model_class_name}Category"
   end
   

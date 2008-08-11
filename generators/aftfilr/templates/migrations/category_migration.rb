@@ -5,7 +5,7 @@ class <%= categories_migration_name %> < ActiveRecord::Migration
       t.timestamps
     end
     
-    if <%= category_class_name %>.find(:all).empty?
+    if <%= category_model_class_name %>.find(:all).empty?
       cat = <%= category_class_name %>.create(:name => 'Research')
       cat.save!
     end
