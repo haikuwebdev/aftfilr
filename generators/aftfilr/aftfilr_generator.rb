@@ -86,6 +86,7 @@ class AftfilrGenerator < Rails::Generator::NamedBase
       m.template 'views/_document.html.erb', File.join(views_dir, '_document.html.erb')
       m.template 'views/new.html.erb', File.join(views_dir, 'new.html.erb')
       m.template 'views/index.html.erb', File.join(views_dir, 'index.html.erb')
+      m.template 'views/edit.html.erb', File.join(views_dir, 'edit.html.erb') if options[:with_categories]
       
       # Categories views
       if options[:with_categories]

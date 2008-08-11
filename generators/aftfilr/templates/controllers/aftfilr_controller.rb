@@ -6,11 +6,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.js do
-        render :update do |page|
-          page.replace_html :document_area, :partial => '<%= plural_name %>/document', :collection => @<%= plural_name %>
-        end
-      end
+      format.js { index_js }
     end
   end
   
@@ -40,6 +36,25 @@ class <%= controller_class_name %>Controller < ApplicationController
     end
   end
   
+  # GET /<%= plural_name %>/1/edit
+  def edit
+    @<%= singular_name %> = <%= model_class_name %>.find(params[:id])
+  end
+  
+  # PUT /<%= plural_name %>/1
+  def update
+    @<%= singular_name %> = <%= model_class_name %>.find(params[:id])
+
+    respond_to do |format|
+      if @<%= singular_name %>.update_attributes(params[:<%= singular_name %>])
+        flash[:notice] = '<%= model_class_name %> was successfully updated.'
+        format.html { redirect_to(<%= plural_name %>_url) }
+      else
+        format.html { render :action => "edit" }
+      end
+    end
+  end
+  
   # DELETE /<%= plural_name %>/1
   def destroy
     @<%= singular_name %> = <%= model_class_name %>.find(params[:id])
@@ -48,6 +63,16 @@ class <%= controller_class_name %>Controller < ApplicationController
     respond_to do |format|
       format.html { redirect_to(<%= plural_name %>_url) }
       format.js {}
+    end
+  end
+  
+  protected
+  
+  def index_js
+    @categories = <%= model_class_name %>.find(:all)
+    render :update do |page|
+      # page.replace_html :categories_area
+      page.replace_html :documents_area, :partial => '<%= plural_name %>/document', :collection => @<%= plural_name %>
     end
   end
 end
