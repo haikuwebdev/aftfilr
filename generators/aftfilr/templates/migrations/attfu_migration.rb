@@ -5,7 +5,7 @@ class <%= migration_class_name %> < ActiveRecord::Migration
       t.string :content_type
       t.string :filename
       <%- if options[:with_categories] -%>
-      t.integer <%= ":#{singular_name}_category_id" %>  
+      t.integer <%= ":#{category_singular_name}_id" %>  
       <%- end -%>
       t.timestamps
     end

@@ -1,5 +1,5 @@
 class AftfilrGenerator < Rails::Generator::NamedBase
-  default_options :with_categories => false,:skip_migration => false
+  default_options :with_categories => false, :skip_migration => false
   
   attr_reader   :controller_name,
                 :controller_class_path,
@@ -41,6 +41,7 @@ class AftfilrGenerator < Rails::Generator::NamedBase
       # Models
       m.directory(File.join('app/models', class_path))
       m.template 'models/attfu_model.rb', File.join('app/models', class_path, "#{singular_name}.rb")
+      m.template 'models/category_model.rb', "app/models/#{singular_name}_category.rb" if options[:with_categories]
       
       # Controllers
       m.directory(File.join('app/controllers', controller_class_path))
@@ -106,6 +107,22 @@ class AftfilrGenerator < Rails::Generator::NamedBase
   
   def views_dir
     File.join('app/views', controller_class_path, controller_file_name)
+  end
+  
+  def category_singular_name
+    singular_name + '_category'
+  end
+  
+  def categories_migration_name
+    "Create#{model_class_name}Categories"
+  end
+  
+  def categories_table_name
+    "#{singular_name}_categories"
+  end
+  
+  def category_class_name
+    "#{model_class_name}Category"
   end
   
   protected
