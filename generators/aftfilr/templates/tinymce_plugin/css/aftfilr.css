@@ -12,9 +12,11 @@ h1#aftfilr_heading {
 div.document_link {
   cursor: pointer;
   float: left;
-  padding: 10px;
+  margin: 0 5px;
   text-align: center;
-  /*width: 120px;*/
+}
+div.document_filename a {
+  margin: 0 0 0 5px;
 }
 table#aftfilr_content_area {
   margin: 10px 20px;

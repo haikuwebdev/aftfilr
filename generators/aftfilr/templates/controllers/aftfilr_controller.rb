@@ -2,8 +2,9 @@ class <%= controller_class_name %>Controller < ApplicationController
   
   # GET /<%= plural_name %>
   def index
+    @documents = <%= model_class_name %>.find(:all)
     respond_to do |format|
-      format.html { @documents = <%= model_class_name %>.find(:all) }
+      format.html # index.html.erb
       format.js { index_js }
     end
   end
@@ -21,7 +22,9 @@ class <%= controller_class_name %>Controller < ApplicationController
   # POST /<%= plural_name %>
   def create
     @<%= singular_name %> = <%= model_class_name %>.new(params[:<%= singular_name %>])
-
+    <%- if options[:with_categories] -%>
+    @active_category = @<%= singular_name %>.category
+    <%- end -%>
     respond_to do |format|
       if @<%= singular_name %>.save
         flash[:notice] = '<%= model_class_name %> was successfully created.'
@@ -56,23 +59,32 @@ class <%= controller_class_name %>Controller < ApplicationController
   # DELETE /<%= plural_name %>/1
   def destroy
     @<%= singular_name %> = <%= model_class_name %>.find(params[:id])
+    <%- if options[:with_categories] -%>
+    @active_category = @<%= singular_name %>.category
+    <%- end -%>
     @<%= singular_name %>.destroy
 
     respond_to do |format|
       format.html { redirect_to(<%= plural_name %>_url) }
-      format.js {}
+      format.js { index_js }
     end
   end
   
   protected
   
   def index_js
+    <%- if options[:with_categories] -%>
     @categories = <%= category_model_class_name %>.find(:all)
     @active_category = @active_category || <%= category_model_class_name %>.find_by_id(params[:category]) || <%= category_model_class_name %>.default
     @documents = @active_category.documents
+    <%- end -%>
     render :update do |page|
       page.replace_html :categories_area, :partial => '<%= categories_plural_name %>/category', :collection => @categories
-      page.replace_html :documents_area, :partial => '<%= plural_name %>/document', :collection => @documents
+      unless @documents.empty?
+        page.replace_html :documents_area, :partial => '<%= plural_name %>/document', :collection => @documents
+      else
+        page.replace_html :documents_area, 'There are no documents to display.'
+      end
       page.replace_html :form_area, :partial => '<%= plural_name %>/upload'
     end
   end

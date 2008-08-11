@@ -1,5 +1,3 @@
-<%%= content_tag :p, 'There are no documents for this category' if @documents.empty? %>
-
 <div class="<%%= category == @active_category ? 'active category' : 'category' %>">
   <div class="category_icon">
     <%%= link_to_remote image_tag('category_icon.png'), :url => <%= plural_name %>_url(:category => category), :method => :get %>

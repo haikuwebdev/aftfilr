@@ -67,6 +67,7 @@ class AftfilrGenerator < Rails::Generator::NamedBase
       m.template 'tinymce_plugin/langs/en.js', File.join(tinymce_plugin_dir, 'langs', "en.js")
       m.template 'tinymce_plugin/langs/en_dlg.js', File.join(tinymce_plugin_dir, 'langs', "en_dlg.js")
       m.file 'tinymce_plugin/img/document_icon.png', File.join('public', 'images', 'document_icon.png')
+      m.file 'tinymce_plugin/img/delete.png', File.join('public', 'images', 'delete.png')
       
       # Migrations
       unless options[:skip_migration]

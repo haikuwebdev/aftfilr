@@ -1,9 +1,10 @@
-<div class="document_link" 
-     onclick="<%%= "javascript:<%= tinymce_dialog_name %>.insert('#{document.public_filename}', '#{document.filename}');return false;" %>">
-  <div class="document_icon">
+<div class="document_link">
+  <div class="document_icon"
+       onclick="<%%= "javascript:<%= tinymce_dialog_name %>.insert('#{document.public_filename}', '#{document.filename}');return false;" %>">
     <%%= image_tag 'document_icon.png' %>
   </div>
   <div class="document_filename">
     <%%= document.filename %>
+    <%%= link_to_remote image_tag('delete.png'), :url => <%= singular_name %>_url(document), :method => :delete %>
   </div>
 </div>
