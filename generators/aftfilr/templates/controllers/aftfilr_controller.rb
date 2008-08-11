@@ -6,7 +6,11 @@ class <%= controller_class_name %>Controller < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.js {}
+      format.js do
+        render :update do |page|
+          page.replace_html :document_area, :partial => '<%= plural_name %>/document', :collection => @<%= plural_name %>
+        end
+      end
     end
   end
   

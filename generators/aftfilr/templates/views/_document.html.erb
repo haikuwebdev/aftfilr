@@ -1,0 +1,9 @@
+<div class="document_link" 
+     onclick="<%%= "javascript:<%= tinymce_dialog_name %>.insert('#{document.public_filename}', '#{document.filename}');return false;" %>">
+  <div class="document_icon">
+    <%%= image_tag 'document_icon.png' %>
+  </div>
+  <div class="document_filename">
+    <%%= document.filename %>
+  </div>
+</div>

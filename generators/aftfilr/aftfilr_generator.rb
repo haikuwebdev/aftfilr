@@ -61,6 +61,7 @@ class AftfilrGenerator < Rails::Generator::NamedBase
       m.directory(File.join(tinymce_plugin_dir, 'langs'))
       m.template 'tinymce_plugin/langs/en.js', File.join(tinymce_plugin_dir, 'langs', "en.js")
       m.template 'tinymce_plugin/langs/en_dlg.js', File.join(tinymce_plugin_dir, 'langs', "en_dlg.js")
+      m.file 'tinymce_plugin/img/document_icon.png', File.join('public', 'images', 'document_icon.png')
       
       # Migrations
       unless options[:skip_migration]
@@ -71,6 +72,7 @@ class AftfilrGenerator < Rails::Generator::NamedBase
       
       # Views
       m.directory(File.join('app/views', controller_class_path, controller_file_name))
+      m.template 'views/_document.html.erb', File.join(views_dir, '_document.html.erb')
       m.template 'views/new.html.erb', File.join(views_dir, 'new.html.erb')
       m.template 'views/index.html.erb', File.join(views_dir, 'index.html.erb')
       
