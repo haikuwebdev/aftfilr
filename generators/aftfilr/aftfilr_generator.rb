@@ -79,7 +79,7 @@ class AftfilrGenerator < Rails::Generator::NamedBase
       
       # Routes
       m.route_resources controller_file_name
-      
+      m.route_resources categories_table_name
     end
   end
   
@@ -123,6 +123,10 @@ class AftfilrGenerator < Rails::Generator::NamedBase
   
   def category_model_class_name
     "#{model_class_name}Category"
+  end
+  
+  def categories_controller_class_name
+    model_class_name + 'CategoriesController'
   end
   
   protected
