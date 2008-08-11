@@ -3,6 +3,9 @@
 <%% form_for @<%= singular_name %>, :html => { :multipart => true } do |f| %>
   <%%= f.error_messages %>
   <p><%%= f.file_field :uploaded_data %></p>
+  <%- if options[:with_categories] -%>
+  <%%= f.select :<%= category_singular_name %>_id, <%= category_model_class_name %>.find(:all).collect{|cat| [cat.name, cat.id]} %>
+  <%- end -%>
   <p><%%= f.submit "Create" %></p>
 <%% end %>
 
