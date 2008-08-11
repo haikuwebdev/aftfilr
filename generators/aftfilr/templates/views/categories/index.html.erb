@@ -1,0 +1,15 @@
+<h1>Listing <%= categories_plural_name %></h1>
+
+<table>
+<%% @<%= categories_plural_name %>.each do |category| %>
+<tr>
+  <td>Name: <%%= category.name %></td>
+  <td><%%= link_to 'Edit', edit_category_path(category) %></td>
+  <td><%%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete %></td>
+</tr>
+<%% end %>
+</table>
+
+<br />
+
+<%%= link_to 'New <%= category_singular_name %>', new_<%= category_singular_name %>_path %>

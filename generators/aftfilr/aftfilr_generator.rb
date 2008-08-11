@@ -120,6 +120,7 @@ class AftfilrGenerator < Rails::Generator::NamedBase
   def categories_table_name
     "#{singular_name}_categories"
   end
+  alias_method :categories_plural_name, :categories_table_name
   
   def category_model_class_name
     "#{model_class_name}Category"
