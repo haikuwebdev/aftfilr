@@ -22,14 +22,14 @@
   <!-- We'll fill the divs in with AJAX calls. -->
   <table id="aftfilr_content_area" border="0" cellspacing="0" cellpadding="0">
     <tr>
-      <td class="left_column">
+      <td id="left_column">
         <%- if options[:with_categories] -%>
         <div id="categories_area"></div>
         <%- else -%>
         &nbsp;
         <%- end -%>
       </td>
-      <td class="right_column">
+      <td id="right_column">
         <div id="documents_area"></div>
       </td>
     </tr>

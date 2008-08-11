@@ -1,3 +1,6 @@
+a img {
+  border: none;
+}
 h1#aftfilr_heading {
 	border-bottom: 2px solid #ff6803;
 	color: #000000;
@@ -8,8 +11,55 @@ h1#aftfilr_heading {
 }
 div.document_link {
   cursor: pointer;
-  float: left;
+  /*float: left;*/
   padding: 10px;
   text-align: center;
   width: 120px;
 }
+table#aftfilr_content_area {
+  margin: 10px 20px;
+  width: 720px;
+}
+table#aftfilr_content_area td {
+  font-size: 12px;
+  vertical-align: top;
+}
+table#aftfilr_content_area td#left_column {
+  width: 100px;
+}
+table#aftfilr_content_area td#left_column div.category {
+  margin: 0 10px 0 0;
+  text-align: center;
+  width: 90px;
+}
+table#aftfilr_content_area td#left_column div.category_icon {
+  margin: 0;
+  padding: 5px 0 0 0;
+}
+table#aftfilr_content_area td#left_column div.category_text {
+  margin: 0;
+  padding: 0 0 5px 0;
+}
+table#aftfilr_content_area td#left_column div.category_text a {
+  color: #000000;
+  font-size: 12px;
+  text-decoration: none;
+}
+table#aftfilr_content_area td#left_column div.category_text a:hover {
+  text-decoration: underline;
+}
+table#aftfilr_content_area td#left_column div.active.category {
+  border: 2px solid #ff6803;
+}
+table#aftfilr_content_area td#right_column {
+  margin: 0;
+  padding: 0;
+  width: 600px;
+}
+table#aftfilr_content_area td#right_column div#documents_area {
+  background-color: #ececec;
+	border: 2px solid #666666;
+	padding: 10px;
+  width: 590px;
+}
+

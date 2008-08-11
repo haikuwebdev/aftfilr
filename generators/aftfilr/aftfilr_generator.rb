@@ -60,7 +60,7 @@ class AftfilrGenerator < Rails::Generator::NamedBase
       m.file 'tinymce_plugin/css/aftfilr.css', File.join(tinymce_plugin_dir, 'css', "#{singular_name}.css")
       m.directory(File.join(tinymce_plugin_dir, 'img'))
       m.file 'tinymce_plugin/img/aftfilr.png', File.join(tinymce_plugin_dir, 'img', "#{singular_name}.png")
-      m.file 'tinymce_plugin/img/category.png', File.join(tinymce_plugin_dir, 'img', "category.png")
+      m.file 'tinymce_plugin/img/category_icon.png', File.join(tinymce_plugin_dir, 'img', "category_icon.png")
       m.directory(File.join(tinymce_plugin_dir, 'js'))
       m.template 'tinymce_plugin/js/dialog.js', File.join(tinymce_plugin_dir, 'js', "dialog.js")
       m.directory(File.join(tinymce_plugin_dir, 'langs'))
@@ -91,11 +91,13 @@ class AftfilrGenerator < Rails::Generator::NamedBase
       # Categories views
       if options[:with_categories]
         m.directory(categories_views_dir)
+        m.template 'views/categories/_category.html.erb', File.join(categories_views_dir, '_category.html.erb')
         m.template 'views/categories/_form.html.erb', File.join(categories_views_dir, '_form.html.erb')
         m.template 'views/categories/index.html.erb', File.join(categories_views_dir, 'index.html.erb')
         m.template 'views/categories/new.html.erb', File.join(categories_views_dir, 'new.html.erb')
         m.template 'views/categories/show.html.erb', File.join(categories_views_dir, 'show.html.erb')
         m.template 'views/categories/edit.html.erb', File.join(categories_views_dir, 'edit.html.erb')
+        m.file 'tinymce_plugin/img/category_icon.png', File.join('public', 'images', 'category_icon.png')
       end
       
       # Routes

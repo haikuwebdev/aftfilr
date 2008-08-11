@@ -2,8 +2,6 @@ class <%= controller_class_name %>Controller < ApplicationController
   
   # GET /<%= plural_name %>
   def index
-    @<%= plural_name %> = <%= model_class_name %>.find(:all)
-
     respond_to do |format|
       format.html # index.html.erb
       format.js { index_js }
@@ -69,10 +67,12 @@ class <%= controller_class_name %>Controller < ApplicationController
   protected
   
   def index_js
-    @categories = <%= model_class_name %>.find(:all)
+    @categories = <%= category_model_class_name %>.find(:all)
+    @active_category = @active_category || <%= category_model_class_name %>.find_by_id(params[:category]) || <%= category_model_class_name %>.default
+    @documents = @active_category.documents
     render :update do |page|
-      # page.replace_html :categories_area
-      page.replace_html :documents_area, :partial => '<%= plural_name %>/document', :collection => @<%= plural_name %>
+      page.replace_html :categories_area, :partial => '<%= categories_plural_name %>/category', :collection => @categories
+      page.replace_html :documents_area, :partial => '<%= plural_name %>/document', :collection => @documents
     end
   end
 end
