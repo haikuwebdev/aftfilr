@@ -1,0 +1,10 @@
+<h1>Editing <%= category_singular_name %></h1>
+
+<%% form_for(@<%= category_singular_name %>) do |f| %>
+  <%%= f.error_messages %>
+  <%%= render :partial => 'form', :locals => { :f => f } %>
+  <p><%%= f.submit "Update" %></p>
+<%% end %>
+
+<%%= link_to 'Show', @<%= category_singular_name %> %> |
+<%%= link_to 'Back', <%= categories_plural_name %>_path %>

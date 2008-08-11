@@ -6,7 +6,7 @@ class <%= categories_migration_name %> < ActiveRecord::Migration
     end
     
     if <%= category_model_class_name %>.find(:all).empty?
-      cat = <%= category_class_name %>.create(:name => 'Research')
+      cat = <%= category_model_class_name %>.create(:name => 'Research')
       cat.save!
     end
   end

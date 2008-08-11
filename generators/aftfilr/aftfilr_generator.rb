@@ -47,6 +47,10 @@ class AftfilrGenerator < Rails::Generator::NamedBase
       m.directory(File.join('app/controllers', controller_class_path))
       m.template('controllers/aftfilr_controller.rb', 
                  File.join('app/controllers', controller_class_path, "#{controller_file_name}_controller.rb"))
+      if options[:with_categories]
+      m.template('controllers/categories_controller.rb', 
+                 File.join('app/controllers', controller_class_path, "#{categories_controller_file_name}.rb"))
+      end
       
       # TinyMCE plugin
       m.directory(tinymce_plugin_dir)
@@ -70,12 +74,28 @@ class AftfilrGenerator < Rails::Generator::NamedBase
                              :assigns => { :migration_class_name => migration_class_name },
                              :migration_file_name => "create_#{table_name}"
       end
+      if options[:with_categories] && !options[:skip_migration]
+        migration_with_sleep
+        m.migration_template 'migrations/category_migration.rb', 'db/migrate',
+                             :assigns => { :categories_migration_name => categories_migration_name },
+                             :migration_file_name => "create_#{singular_name}_categories"
+      end
       
       # Views
       m.directory(File.join('app/views', controller_class_path, controller_file_name))
       m.template 'views/_document.html.erb', File.join(views_dir, '_document.html.erb')
       m.template 'views/new.html.erb', File.join(views_dir, 'new.html.erb')
       m.template 'views/index.html.erb', File.join(views_dir, 'index.html.erb')
+      
+      # Categories views
+      if options[:with_categories]
+        m.directory(categories_views_dir)
+        m.template 'views/categories/_form.html.erb', File.join(categories_views_dir, '_form.html.erb')
+        m.template 'views/categories/index.html.erb', File.join(categories_views_dir, 'index.html.erb')
+        m.template 'views/categories/new.html.erb', File.join(categories_views_dir, 'new.html.erb')
+        m.template 'views/categories/show.html.erb', File.join(categories_views_dir, 'show.html.erb')
+        m.template 'views/categories/edit.html.erb', File.join(categories_views_dir, 'edit.html.erb')
+      end
       
       # Routes
       m.route_resources controller_file_name
@@ -130,6 +150,14 @@ class AftfilrGenerator < Rails::Generator::NamedBase
     model_class_name + 'CategoriesController'
   end
   
+  def categories_controller_file_name
+    "#{singular_name}_categories_controller"
+  end
+  
+  def categories_views_dir
+    File.join('app/views', controller_class_path, categories_plural_name)
+  end
+  
   protected
   
   def add_options!(opt)
@@ -139,6 +167,18 @@ class AftfilrGenerator < Rails::Generator::NamedBase
            "Do not generate migrations for any models.") { |v| options[:skip_migration] = v }
     opt.on("--with-categories",
            "Add categories to be associated with the generated model.") { |v| options[:with_categories] = v }
+  end
+  
+  def migration_with_sleep
+    if Rails::VERSION::MAJOR >= 2 && Rails::VERSION::MINOR >= 1
+      Rails::Generator::Commands::Base.class_eval do
+        protected
+        def next_migration_string(padding = 3)
+          sleep(1)
+          Time.now.utc.strftime("%Y%m%d%H%M%S") 
+        end
+      end
+    end
   end
   
 end
