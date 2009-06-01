@@ -104,7 +104,7 @@ class AftfilrGenerator < Rails::Generator::NamedBase
       
       # Routes
       m.route_resources controller_file_name
-      m.route_resources categories_table_name
+      m.route_resources categories_table_name if options[:with_categories]
     end
   end
   
