@@ -31,9 +31,15 @@
 				image : url + '/img/<%= singular_name %>.png'
 			});
 
-			// Add a node change handler, selects the button in the UI when a image is selected
-			ed.onNodeChange.add(function(ed, cm, n) {
-				cm.setActive('<%= singular_name %>', n.nodeName == 'IMG');
+      // Listen to onNodeChange event.
+      // Parameters
+      //   ed: tinymce.Editor
+      //   cm: tinymce.ControlManager,
+      //   el: Element
+      //   collapsed: Boolean tinymce.dom.Selection/isCollapsed
+			ed.onNodeChange.add(function(ed, cm, el, collapsed) {
+			  cm.setDisabled('<%= singular_name %>', collapsed && el.nodeName != 'A');
+				cm.setActive('<%= singular_name %>', el.nodeName == 'A' && !el.name);
 			});
 		},
 
@@ -61,7 +67,7 @@
 			return {
 				longname : '<%= model_class_name %> plugin',
 				author : 'TJ Stankus',
-				authorurl : 'http://www.haikuwebdev.com',
+				authorurl : 'http://tj.stank.us',
 				version : "0.1"
 			};
 		}

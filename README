@@ -11,7 +11,6 @@ TinyMCE.
 Example
 =======
 
-Example goes here.
+script/generate aftfilr ArticleFile
 
-
-Copyright (c) 2008 TJ Stankus, released under the MIT license.
+Copyright (c) 2008-2009 TJ Stankus, released under the MIT license.
