@@ -5,7 +5,7 @@ var <%= tinymce_dialog_name %> = {
 
 	insert : function(document_url) {
 	  var link_content = tinyMCEPopup.editor.selection.getContent();
-	  var link_html = '<a href="' + document_url + '>' + link_content + '</a>';
+	  var link_html = '<a href="' + document_url + '">' + link_content + '</a>';
 		tinyMCEPopup.editor.execCommand('mceInsertContent', false, link_html);
 		tinyMCEPopup.close();
 	}
